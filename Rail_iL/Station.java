@@ -1,4 +1,4 @@
-package Rail_il;
+package Rail_iL;
 
 public class Station {
     String stationName;

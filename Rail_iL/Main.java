@@ -1,4 +1,4 @@
-package Rail_il;
+package Rail_iL;
 
 import java.util.ArrayList;
 import java.util.Scanner;
