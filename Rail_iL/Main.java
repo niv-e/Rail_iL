@@ -7,7 +7,7 @@ public class Main {
 	public static void main(String[] args) {
 		Scanner s = new Scanner(System.in);
 		boolean exit = false;
-		ArrayList<Ride> travels = new ArrayList<Ride>();
+		ArrayList<Ride> Rides = new ArrayList<Ride>();
 		while(!exit) {
 			System.out.println("Hi!");
 			System.out.println("Please select an option");
@@ -18,22 +18,23 @@ public class Main {
 			
 			switch(option) {
 			case 1:
-				boolean addMoreTravels;
+				boolean addMoreRides;
 				Ride r = new Ride();
-				travels.add(r);
+				Rides.add(r);
 				
 				do {
 					System.out.println("Add More Travels? (true\false)");
-					addMoreTravels = s.nextBoolean();
-					if(addMoreTravels == true) {
+					addMoreRides = s.nextBoolean();
+					if(addMoreRides == true) {
 					Ride r1 = new Ride();
 			    	travels.add(r1);
 					}
-				}while(addMoreTravels);
+				}while(addMoreRides);
 		
 			    	break;
 			case 2:
-				System.out.println(travels.toString());
+				for (Ride ride : Rides) {
+					System.out.println(ride.toString());
 				
 				break;
 			case 9:
