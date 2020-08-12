@@ -103,7 +103,7 @@ public class Ride {
 
     public String toString(){
         StringBuilder sb = new StringBuilder();
-        sb.append("Department name:\t"  + departmentName + "\nDepartment time:\t" + timeToPrint(departmentTime)
+        sb.append("\nDepartment name:\t"  + departmentName + "\nDepartment time:\t" + timeToPrint(departmentTime)
             +"\nDestination name:\t" +destinationName +"\nDestination time:\t"+ timeToPrint(destinationTime) );
         return sb.toString();
     }
