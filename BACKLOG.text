@@ -1,9 +1,20 @@
 TODO list:
 
-1. fix run time errors in ride.class (space error and etc) - Niv
-2. on main class change travles dynamic array to Rides (same name as the Rides class) - Nadeen
-3. fix the toString on the dynamic array list (take of the "[]" and "," from the print) - Nadeen
-4. add the buble sort from the RideManager to the main class - Adir
-5. create new clock class and fix run time errors - Adir
-6. create the new feature for session 2 (we'il divide up the work that will be uploaded to the model)
+10/08/20:
 
+1. fix run time errors in ride.class (space error and etc) - Niv - Fixed
+2. on main class change travles dynamic array to Rides (same name as the Rides class) - Nadeen - Fixed
+3. fix the toString on the dynamic array list (take of the "[]" and "," from the print) - Nadeen - Fixed
+4. add the buble sort from the RideManager to the main class - Adir - Fixed
+5. create new clock class and fix run time errors - Adir - Fixed
+6. create the new feature for session 2 (we'il divide up the work that will be uploaded to the model) - Ongoing
+
+17/08/20:
+
+1. Sorting for number of intermidate stations per ride by time.
+2. Searching for bugs and handeling.
+3. Fix spelling errors.
+4. Default text for "no intermidate stations".
+5. Not allowing numbers to be written instead of stations name.
+6. Checking if intemidate station is in the ride time frame.
+ 
