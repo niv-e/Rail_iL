@@ -43,6 +43,7 @@ public class Main {
 
 				case 3:
 					Collections.sort(manager.allRides , new SortRideByDepartureTime());
+					Collections.sort(Ride.allIntermediateStations , new SortRideByStopTime());
 					System.out.print("sorted by departure time:");
 					System.out.print(manager.toString());
 					break;

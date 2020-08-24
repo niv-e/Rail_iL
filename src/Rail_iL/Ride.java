@@ -1,9 +1,10 @@
 
+import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ride {
-	ArrayList<IntermediateStation> allIntermediateStations = new ArrayList<IntermediateStation>();
+	static ArrayList<IntermediateStation> allIntermediateStations = new ArrayList<IntermediateStation>();
 	String departureName;
 	String destinationName;
 	Clock departureTime=new Clock();
@@ -67,4 +68,5 @@ public class Ride {
 		return sb.toString();
 	}
 
+	
 }

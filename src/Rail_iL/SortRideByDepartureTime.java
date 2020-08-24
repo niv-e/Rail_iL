@@ -10,4 +10,5 @@ public class SortRideByDepartureTime implements Comparator <Ride> {
             return -1;
         else return 0;
     }
+    
 }
