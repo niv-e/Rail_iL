@@ -24,6 +24,7 @@ public class Ride {
 
 	public boolean addIntermediateStation(String name ){
 		IntermediateStation i = new IntermediateStation(name);
+		i.isCorrectExpectedStopTime(this);
 		allIntermediateStations.add(i);
 		return true;
 	}
