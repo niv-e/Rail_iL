@@ -58,6 +58,22 @@ public class Clock {
 		return false;
 	}
 
+	public int getHours() {
+		return hours;
+	}
+
+	public void setHours(int hours) {
+		this.hours = hours;
+	}
+
+	public int getMinutes() {
+		return minutes;
+	}
+
+	public void setMinutes(int minutes) {
+		this.minutes = minutes;
+	}
+
 	public String toString(){
 		StringBuilder sb = new StringBuilder();
 		if(hours<0)
