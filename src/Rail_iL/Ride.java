@@ -22,11 +22,14 @@ public class Ride {
 			System.out.println("Invalid input please try again");
 	}
 
-	public boolean addIntermediateStation(String name ){
+		public boolean addIntermediateStation(String name ){
 		IntermediateStation i = new IntermediateStation(name);
-		i.isCorrectExpectedStopTime(this);
-		allIntermediateStations.add(i);
-		return true;
+		if(i.isCorrectExpectedStopTime(this)) {
+			allIntermediateStations.add(i);
+			return true;
+		}else
+			System.out.println("The time you entered is not in the range between the time of departure and the time of arrival");
+		return false;
 	}
 
 	public boolean setDepartureName() {
