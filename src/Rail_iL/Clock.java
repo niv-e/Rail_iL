@@ -1,4 +1,3 @@
-
 import java.util.Scanner;
 
 public class Clock {
@@ -6,7 +5,6 @@ public class Clock {
 	int minutes;
 
 	Scanner s = new Scanner(System.in);
-
 
 	public Clock() {
 		this.hours = 0;
@@ -48,7 +46,10 @@ public class Clock {
 
 		}catch(Exception e){
 				System.out.println("Invalid time format! please try again\n" + e.getMessage());
+				s.nextLine();
+				setTime();
 		}
+
 
 		if(checkTime(tempHours,tempMinutes)) {
 			hours = tempHours;
@@ -70,6 +71,4 @@ public class Clock {
 
 		return sb.toString();
 	}
-
-
 }

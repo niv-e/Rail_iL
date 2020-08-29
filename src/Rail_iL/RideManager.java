@@ -1,8 +1,5 @@
-
-
 import java.util.ArrayList;
 import java.util.Collections;
-
 
 public class RideManager {
     ArrayList<Ride> allRides;
