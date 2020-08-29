@@ -30,12 +30,23 @@ public class Ride {
 		}
 	}
 
+<<<<<<< HEAD
 	public boolean addIntermediateStation(String name){
 		IntermediateStation i = new IntermediateStation(name);
 		while(!(i.checkIfTimeInRange(departureTime ,destinationTime)))
 			i.expectedStopTime.setTime();
 		allIntermediateStations.add(i);
 		return true;
+=======
+		public boolean addIntermediateStation(String name ){
+		IntermediateStation i = new IntermediateStation(name);
+		if(i.isCorrectExpectedStopTime(this)) {
+			allIntermediateStations.add(i);
+			return true;
+		}else
+			System.out.println("The time you entered is not in the range between the time of departure and the time of arrival");
+		return false;
+>>>>>>> d42393407f5ab290ef0f2016843a12e91eb94bd4
 	}
 
 	public String toString() {

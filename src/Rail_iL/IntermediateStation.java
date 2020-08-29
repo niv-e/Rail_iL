@@ -9,6 +9,17 @@ public class IntermediateStation extends Station {
         while(!expectedStopTime.setTime())
             System.out.println("Invalid input please try again");
     }
+    
+    	Ride r = new Ride();
+	public boolean isCorrectExpectedStopTime(Ride r) {
+		if(r.getDepartureTime().getHours() > expectedStopTime.getHours() || r.getDestinationTime().getHours() < expectedStopTime.getHours()) {
+			return false;
+		} else if(((r.getDepartureTime().getHours() == expectedStopTime.getHours())&&(r.getDepartureTime().getMinutes() > expectedStopTime.getMinutes())) 
+				||((r.getDestinationTime().getHours() == expectedStopTime.getHours()) && (r.getDestinationTime().getMinutes() < expectedStopTime.getMinutes()))) {
+			return false;
+		}
+		return true;
+	}
 
     public boolean checkIfTimeInRange(Clock departureTime , Clock destinationTime){
         if(expectedStopTime.timeToCompare()<departureTime.timeToCompare() ||
