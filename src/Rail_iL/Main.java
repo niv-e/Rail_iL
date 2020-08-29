@@ -67,7 +67,7 @@ public class Main {
 		Scanner s = new Scanner(System.in);
 		System.out.println("please enter y for yes or any key to exit");
 		char c = s.next().charAt(0);
-		boolean res = (c == 'y' || c == 'Y')? true:false;
-		return res;
+		return  (c == 'y' || c == 'Y');
+
 	}
 }
