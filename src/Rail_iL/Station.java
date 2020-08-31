@@ -9,21 +9,11 @@ public class Station {
     }
 
     public Station(String stationName){
-        while(!setStationName(stationName));
         setStationName(stationName);
     }
 
     public Station(Station station){
         this.stationName= station.stationName;
-    }
-
-    public boolean setStationName(){
-        String name = s.nextLine();
-        if(checkIfNameValid(name)) {
-            stationName = name;
-            return true;
-        }
-        return false;
     }
 
     public boolean setStationName(String name){
@@ -47,4 +37,6 @@ public class Station {
         }
         return true;
     }
+
+
 }

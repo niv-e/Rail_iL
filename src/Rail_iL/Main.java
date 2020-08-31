@@ -1,6 +1,5 @@
 import java.util.Collections;
 import java.util.Scanner;
-
 public class Main {
 	public static void main(String[] args) {
 
@@ -17,15 +16,55 @@ public class Main {
 			System.out.println("9- Exit");
 			try {
 				int option = s.nextInt();
+				System.out.print(" \n");
+				s.nextLine(); // clean the buffer from \n
 
 				switch (option) {
 					case 1:
 						boolean addMoreRides = true;
 						while (addMoreRides) {
 							Ride r = new Ride();
+							System.out.println("Please enter departure station's name: ");
+							while(!r.departure.setStationName(s.nextLine())) {
+								System.out.println("Invalid input please try again");
+							}
+							System.out.println("Please enter departure time in format HH:MM :");
+							String stringTime =s.nextLine();
+							while(!r.departureTime.setTime(stringTime)) {
+								System.out.println("Invalid input please try again");
+								System.out.print("");
+								stringTime=s.nextLine();
+								System.out.println("stringTime input: " + stringTime);
+
+							}
+							System.out.println("Please enter destination station's name: ");
+							while(!r.destination.setStationName(s.nextLine())) {
+								System.out.println("Invalid input please try again");
+							}
+
+							System.out.println("Please enter destination time in format HH:MM :");
+							stringTime =s.nextLine();
+							while(!r.destinationTime.setTime(stringTime)) {
+								System.out.println("Invalid input please try again");
+								System.out.print("");
+								stringTime=s.nextLine();
+								System.out.println("stringTime input: " + stringTime);
+
+							}
+							while(!r.checkIfTimeInRange(r.departureTime, r.destinationTime)) {
+								System.out.println("Invalid time input please try again\n" +
+										"Departure time: " + r.departureTime.toString() + "\n" +
+										"Destination time: " + r.destinationTime.toString()
+										+ "\nDestination time can not be entered before departure time! \n");
+								System.out.println("Please enter destination time in format HH:MM :");
+								stringTime =s.nextLine();
+								r.destinationTime.setTime(stringTime);
+							}
+
 							manager.addRide(r);
 							System.out.println("would you like to add another ride");
 							addMoreRides = toContinue();
+
 						}
 						break;
 
@@ -33,10 +72,27 @@ public class Main {
 						boolean addMoreStations = true;
 						System.out.println("Please enter the main ride number: ");
 						int choice = s.nextInt() - 1;
+						s.nextLine();
+
 						while (addMoreStations) {
 							System.out.println("Please enter intermediate station name: ");
-							String intermediateName = s.next();
-							boolean res = manager.addIntermediateStop(choice, intermediateName);
+							String intermediateName = s.nextLine();
+							System.out.println("Please enter estimated stop time in format HH:MM: ");
+							String estimatedStopTime = s.nextLine();
+							IntermediateStation i = new IntermediateStation(intermediateName,estimatedStopTime);
+
+							while(!i.checkIfTimeInRange(manager.allRides.get(choice).departureTime,
+									manager.allRides.get(choice).destinationTime)) {
+								System.out.println("Invalid time! \n" +
+										"please make sure the the expected time is in the raid time range");
+								System.out.println("Departure time: "
+										+ manager.allRides.get(choice).departureTime.toString() + "\n"
+										+ "Destination time: " +
+										manager.allRides.get(choice).destinationTime.toString());
+								System.out.println("Please enter estimated stop time in format HH:MM: ");
+								estimatedStopTime = s.nextLine();
+							}
+							manager.allRides.get(choice).addIntermediateStation(i);
 							System.out.println("would you like to add another intermediate station? ");
 							addMoreStations = toContinue();
 						}
@@ -73,6 +129,12 @@ public class Main {
 		System.out.println("please enter y for yes or any key to exit");
 		char c = s.next().charAt(0);
 		return  (c == 'y' || c == 'Y');
+	}
+
+	public static void bufferClean(Scanner s){
+		while (s.hasNext())
+			s.next();
+		return;
 
 	}
 }

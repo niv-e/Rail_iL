@@ -34,9 +34,7 @@ public class Clock {
 		return timeToCompare;
 	}
 
-	public boolean setTime(){
-		System.out.println("Please enter time in format HH:MM :");
-		String stringTime = s.next();
+	public boolean setTime(String stringTime){
 		int tempHours = 0;
 		int tempMinutes = 0;
 
@@ -45,9 +43,8 @@ public class Clock {
 			tempMinutes = Integer.parseInt(stringTime, 3, 5, 10);
 
 		}catch(Exception e){
-				System.out.println("Invalid time format! please try again\n" + e.getMessage());
-				s.nextLine();
-				setTime();
+				System.out.println(e.getMessage());
+				return false;
 		}
 
 
@@ -87,10 +84,5 @@ public class Clock {
 
 		return sb.toString();
 	}
-<<<<<<< HEAD
-}
-=======
-
 
 }
->>>>>>> d42393407f5ab290ef0f2016843a12e91eb94bd4

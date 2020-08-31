@@ -1,5 +1,3 @@
-
-
 import java.util.Comparator;
 
 public class SortRideByDepartureTime implements Comparator <Ride> {
