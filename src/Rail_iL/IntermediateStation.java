@@ -2,10 +2,8 @@
 public class IntermediateStation extends Station {
 
     Clock estimatedStopTime = new Clock();
-    public IntermediateStation(String stationName , String estimatedStopTime) {
+    public IntermediateStation(String stationName) {
         super(stationName);
-        while(!this.estimatedStopTime.setTime(estimatedStopTime))
-            this.estimatedStopTime.setTime(estimatedStopTime);
     }
 
     public boolean checkIfTimeInRange(Clock departureTime , Clock destinationTime){
@@ -15,6 +13,10 @@ public class IntermediateStation extends Station {
         }
         return true;
         }
+
+    public boolean setTime(String estimatedStopTime){
+        return this.estimatedStopTime.setTime(estimatedStopTime);
+    }
 
     public String toString(){
         StringBuilder sb = new StringBuilder();

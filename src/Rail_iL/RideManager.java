@@ -8,6 +8,12 @@ public class RideManager {
         allRides =  new ArrayList<Ride>();
     }
 
+    //need to rewrite this method (Session 2)
+    public void showRelevantRides(String departureName , String destinationName , String time){
+        Collections.sort(allRides , new SortRideByDepartureTime());
+
+    }
+
     public void addRide (Ride ride){
         allRides.add(ride);
         Collections.sort(allRides , new SortRideByDepartureTime());

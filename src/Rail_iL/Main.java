@@ -16,7 +16,6 @@ public class Main {
 			System.out.println("9- Exit");
 			try {
 				int option = s.nextInt();
-				System.out.print(" \n");
 				s.nextLine(); // clean the buffer from \n
 
 				switch (option) {
@@ -34,8 +33,6 @@ public class Main {
 								System.out.println("Invalid input please try again");
 								System.out.print("");
 								stringTime=s.nextLine();
-								System.out.println("stringTime input: " + stringTime);
-
 							}
 							System.out.println("Please enter destination station's name: ");
 							while(!r.destination.setStationName(s.nextLine())) {
@@ -79,8 +76,14 @@ public class Main {
 							String intermediateName = s.nextLine();
 							System.out.println("Please enter estimated stop time in format HH:MM: ");
 							String estimatedStopTime = s.nextLine();
-							IntermediateStation i = new IntermediateStation(intermediateName,estimatedStopTime);
+							IntermediateStation i = new IntermediateStation(intermediateName);
 
+							while(!i.setTime(estimatedStopTime)) {
+								System.out.println("Please enter estimated stop time in format HH:MM: ");
+								estimatedStopTime = s.nextLine();
+							}
+
+								i.setTime(estimatedStopTime);
 							while(!i.checkIfTimeInRange(manager.allRides.get(choice).departureTime,
 									manager.allRides.get(choice).destinationTime)) {
 								System.out.println("Invalid time! \n" +
@@ -91,6 +94,7 @@ public class Main {
 										manager.allRides.get(choice).destinationTime.toString());
 								System.out.println("Please enter estimated stop time in format HH:MM: ");
 								estimatedStopTime = s.nextLine();
+								i.setTime(estimatedStopTime);
 							}
 							manager.allRides.get(choice).addIntermediateStation(i);
 							System.out.println("would you like to add another intermediate station? ");
@@ -117,12 +121,9 @@ public class Main {
 				System.out.print("Invalid input please enter number from the select list");
 				s.nextLine();
 			}
-
-
 		}
 		s.close();
 	}
-
 
 	public static boolean toContinue() {
 		Scanner s = new Scanner(System.in);
@@ -130,11 +131,5 @@ public class Main {
 		char c = s.next().charAt(0);
 		return  (c == 'y' || c == 'Y');
 	}
-
-	public static void bufferClean(Scanner s){
-		while (s.hasNext())
-			s.next();
-		return;
-
-	}
 }
+
