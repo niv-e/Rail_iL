@@ -18,8 +18,7 @@ public class RideManager {
 				if(r.departureTime.timeToCompare() <= c.timeToCompare()) {
 					System.out.println(r.toString());	
 				}
-			}else
-				System.out.println("There are no rides with this requirements!");
+			}
 		}
 	}
 
