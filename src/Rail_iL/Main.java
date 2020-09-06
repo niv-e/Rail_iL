@@ -13,6 +13,7 @@ public class Main {
 			System.out.println("1- Typing rides details");
 			System.out.println("2- Add intermediate station for exist ride");
 			System.out.println("3- Data Display");
+			System.out.println("4- Display Rides data according to search requirements");
 			System.out.println("9- Exit");
 			try {
 				int option = s.nextInt();
@@ -107,6 +108,16 @@ public class Main {
 						System.out.print("\u001B[0;1msorted by departure time: \033[0;0m");
 						System.out.print(manager.toString());
 						break;
+						
+					case 4:
+					        System.out.println("What station are you coming from?");
+					        String departure = s.next();
+					        System.out.println("What is your destination station?");
+					        String destnation = s.next();
+					        System.out.println("When are you going to leave the departure station? \nPlease enter the time in format HH:MM: ");
+					        String time = s.next();
+					        manager.showRelevantRides(departure, destnation, time);
+					        break;	
 
 					case 9:
 						System.out.println("bye bye!");

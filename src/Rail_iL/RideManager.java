@@ -8,11 +8,19 @@ public class RideManager {
         allRides =  new ArrayList<Ride>();
     }
 
-    //need to rewrite this method (Session 2)
-    public void showRelevantRides(String departureName , String destinationName , String time){
-        Collections.sort(allRides , new SortRideByDepartureTime());
-
-    }
+	public void showRelevantRides(String departureName , String destinationName , String time){
+		Clock c = new Clock();
+		c.setTime(time);
+		Collections.sort(allRides , new SortRideByDepartureTime());
+		for (Ride r : allRides) {	 
+			r.departureTime.setTime(time);
+			if(r.departure.getStationName().equals(departureName) && r.destination.getStationName().contentEquals(destinationName)) {
+				if(r.departureTime.timeToCompare() <= c.timeToCompare()) {
+					System.out.println(r.toString());	
+				}
+			}
+		}
+	}
 
     public void addRide (Ride ride){
         allRides.add(ride);
