@@ -1,3 +1,5 @@
+package Rail_il;
+
 import java.util.Scanner;
 
 public class Clock {
@@ -15,7 +17,7 @@ public class Clock {
 		this.hours = hours;
 		this.minutes = minutes;
 	}
-	
+
 	public boolean checkTime(int Hours, int Minutes) {
 		if ((Hours < 0 || Hours >= 24) || (Minutes < 0 || Minutes >= 60)) {
 			return false;
@@ -39,12 +41,12 @@ public class Clock {
 		int tempMinutes = 0;
 
 		try {
-			tempHours = Integer.parseInt(stringTime, 0, 2, 10);
-			tempMinutes = Integer.parseInt(stringTime, 3, 5, 10);
+			tempHours = Integer.parseInt(stringTime.substring(0,2));
+			tempMinutes = Integer.parseInt(stringTime.substring(3,5));
 
 		}catch(Exception e){
-				System.out.println(e.getMessage());
-				return false;
+			System.out.println(e.getMessage());
+			return false;
 		}
 
 
@@ -52,6 +54,31 @@ public class Clock {
 			hours = tempHours;
 			minutes = tempMinutes;
 			return true;
+		}
+		return false; 
+	}
+	public boolean checkIfClose(Clock c) {
+		Clock timeAfter = new Clock(this.hours, this.minutes) ;
+		Clock timeBefore=new Clock(this.hours, this.minutes) ;
+		if(this.minutes>=30) {
+			timeAfter.hours++;
+			timeAfter.minutes = this.minutes-30;
+			timeBefore.minutes = this.minutes-30; 
+		}
+		else {
+			timeBefore.hours--;
+			timeBefore.minutes = this.minutes+30;
+			timeAfter.minutes = this.minutes+30; 
+		}
+		if(c.hours==timeAfter.hours) {
+			if((timeAfter.minutes-c.minutes<=30 && timeAfter.minutes-c.minutes>=0) 
+					|| (timeBefore.minutes-c.minutes>=30))
+				return true;
+		}
+		if(c.hours==timeBefore.hours) {
+			if((c.minutes-timeBefore.minutes<=30 && c.minutes-timeBefore.minutes>=0)
+					||(c.minutes-timeAfter.minutes>=30)) 
+				return true;
 		}
 		return false;
 	}
@@ -71,6 +98,7 @@ public class Clock {
 	public void setMinutes(int minutes) {
 		this.minutes = minutes;
 	}
+
 
 	public String toString(){
 		StringBuilder sb = new StringBuilder();
