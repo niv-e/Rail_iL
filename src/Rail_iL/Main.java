@@ -112,7 +112,7 @@ public class Main {
 					}else {
 						Collections.sort(manager.allRides, new SortRideByDepartureTime());
 						System.out.print(manager.toString());
-						manager.saveToFile("C:\\Users\\WINDOWS 10 PRO\\eclipse-workspace\\Rail_IL\\src\\Rail_il\\Rides details");
+						manager.saveToFile("C:\\Users\\WINDOWS 10 PRO\\eclipse-workspace\\Rail_IL\\src\\Rail_il\\Rides details"); // The location should change in another computer
 						System.out.println("\n The rides details are saved");
 					}
 					break;
