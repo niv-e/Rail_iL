@@ -1,3 +1,5 @@
+package Rail_il;
+
 import java.util.Comparator;
 
 public class SortRideByStopTime implements Comparator<IntermediateStation> {
@@ -11,3 +13,5 @@ public class SortRideByStopTime implements Comparator<IntermediateStation> {
 	}
 
 }
+
+
