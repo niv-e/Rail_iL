@@ -1,3 +1,5 @@
+package Rail_il;
+
 import java.util.Scanner;
 
 public class Station {
