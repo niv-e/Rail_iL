@@ -1,3 +1,5 @@
+package Rail_il;
+
 
 public class IntermediateStation extends Station {
 
@@ -26,3 +28,4 @@ public class IntermediateStation extends Station {
 
     }
 }
+ 
