@@ -1,13 +1,15 @@
+package Rail_il;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
 public class Ride {
 	ArrayList<IntermediateStation> allIntermediateStations = new ArrayList<IntermediateStation>();
-	Station departure = new Station();
-	Station destination = new Station();;
-	Clock departureTime=new Clock();
-	Clock destinationTime = new Clock();
+	public Station departure = new Station();
+	public Station destination = new Station();;
+	public Clock departureTime=new Clock();
+	public Clock destinationTime = new Clock();
 
 	Scanner s = new Scanner(System.in);
 
@@ -30,6 +32,7 @@ public class Ride {
 		StringBuilder sb = new StringBuilder();
 		sb.append("\nDepartment name:\t" + departure.getStationName() + "\nDepartment time:\t" + departureTime.toString()
 				+ "\nDestination name:\t" + destination.getStationName() + "\nDestination time:\t" + destinationTime.toString());
+		sb.append("\n"+allIntermediateStations.size());
 		sb.append("\n\tIntermediate stations:\n");
 		if(this.allIntermediateStations.isEmpty())
 			sb.append("\tno intermediate station for this moment");
