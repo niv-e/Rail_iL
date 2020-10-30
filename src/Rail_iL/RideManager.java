@@ -14,14 +14,13 @@ public class RideManager {
 		allRides =  new ArrayList<Ride>();
 	}
 
-	public void showRelevantRides(String departureName , String destinationName , String time){
+	public void showRelevantRides(String departureName  , String destinationName , String time ) { 
 		Clock c = new Clock();
-		c.setTime(time);
+		c.setTime(time); 
 		Collections.sort(allRides , new SortRideByDepartureTime());
-		for (Ride r : allRides) {	 
-			r.departureTime.setTime(time);
+		for (Ride r : allRides) { 
 			if(r.departure.getStationName().equals(departureName) && r.destination.getStationName().contentEquals(destinationName)) {
-				if(r.departureTime.timeToCompare() <= c.timeToCompare()) {
+				if(c.checkIfClose(r.departureTime)) { 
 					System.out.println(r.toString());	
 				}
 			}
@@ -41,34 +40,34 @@ public class RideManager {
 		pw.close();
 	}
 
-	public static void readFile(File f) throws FileNotFoundException {
+	public void readFile(File f) throws FileNotFoundException {
 		try { 
-			Scanner scan = new Scanner(new File("C:\\Users\\WINDOWS 10 PRO\\eclipse-workspace\\Rail_IL\\src\\Rail_il\\Rides details"));
-			RideManager rideManager = new RideManager();
-			Ride r1 = new Ride();
+			Scanner scan = new Scanner(new File("C:\\Users\\WINDOWS 10 PRO\\eclipse-workspace\\Rail_IL\\src\\Rail_il\\Rides details")); // The location should change in another computer
+
 			while(scan.hasNextLine()) {
+				Ride r = new Ride();
 				scan.nextLine();scan.nextLine();
 				scan.next();scan.next();
-				r1.departure.setStationName(scan.next()); //departure name
+				r.departure.setStationName(scan.next()); //departure name
 				scan.next();scan.next();
-				r1.departureTime.setTime(scan.next()); //departure time
+				r.departureTime.setTime(scan.next()); //departure time
 				scan.next();scan.next();
-				r1.destination.setStationName(scan.next()); //destination name
+				r.destination.setStationName(scan.next()); //destination name
 				scan.next();scan.next();
-				r1.destinationTime.setTime(scan.next()); //destination time
+				r.destinationTime.setTime(scan.next()); //destination time
 				int num = scan.nextInt();
-				scan.nextLine();
-				rideManager.addRide(r1);
-				ArrayList<IntermediateStation> allIntermediateStations = new ArrayList<IntermediateStation>();
-				IntermediateStation is = new IntermediateStation(null);
+				scan.nextLine();scan.nextLine();
+				IntermediateStation is = new IntermediateStation("toCheck");
+				if(num ==0)
+					scan.nextLine();
 				for (int i = 0; i < num; i++) {
 					String name  = scan.next().trim();
 					is.setStationName(name.substring(0,name.length()-1));
 					scan.next();scan.next();scan.next();
 					is.setTime(scan.next());
-					allIntermediateStations.add(is);	
+					r.addIntermediateStation(is);
 				}
-
+				this.allRides.add(r);
 			}
 			scan.close();
 		} catch (FileNotFoundException e) {
@@ -76,6 +75,10 @@ public class RideManager {
 			e.printStackTrace();
 		}
 
+	}
+
+	public void setAllRides(ArrayList<Ride> allRides) {
+		this.allRides = allRides;
 	}
 
 	public String toString(){
@@ -86,5 +89,10 @@ public class RideManager {
 		}
 		return sb.toString();
 	}
+
+	public ArrayList<Ride> getAllRides() {
+		return allRides;
+	}
+
 
 }
