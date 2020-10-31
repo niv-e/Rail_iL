@@ -1,13 +1,16 @@
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 import Rail_il.Clock;
 import Rail_il.Ride;
 import Rail_il.RideManager;
+import Rail_il.SortRideByDepartureTime;
 public class CheckValidRides {
 
 	public static void main(String[] args) throws IOException {
-		File f = new File("C:\\Users\\WINDOWS 10 PRO\\eclipse-workspace\\Rail_IL\\src\\Rail_il\\Rides details"); // The location should change in another computer
+		File f = new File("C:\\Users\\WINDOWS 10 PRO\\eclipse-workspace\\Rail_IL\\src\\Rail_il\\Rides details");
 		Scanner s = new Scanner(System.in);
 		RideManager manager = new RideManager();
 		Ride r = new Ride(); 
