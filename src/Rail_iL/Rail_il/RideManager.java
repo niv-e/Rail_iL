@@ -5,12 +5,19 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Scanner;
+import java.util.Vector;
 
 public class RideManager {
 	ArrayList<Ride> allRides;
-	final static String F_NAME = "rideDetails";
+	final static String F_NAME = "rideDetails.txt";
+	
+	final static int ZERO_OBJECT = -1;
+	static GregorianCalendar calendar = new GregorianCalendar();
+
 
 	public RideManager(){
 		allRides =  new ArrayList<Ride>();
@@ -21,13 +28,14 @@ public class RideManager {
 		c.setTime(time); 
 		Collections.sort(allRides , new SortRideByDepartureTime());
 		for (Ride r : allRides) { 
-			if(r.departure.getStationName().equals(departureName) && r.destination.getStationName().contentEquals(destinationName)) {
-				if(c.checkIfClose(r.departureTime)) { 
+			if(r.getDeparture().equals(departureName) && 
+					r.getDestination().equalsIgnoreCase(destinationName)) {
+				if(c.checkIfClose(r.getDepartureClock()))
 					System.out.println(r.toString());	
 				}
 			}
 		}
-	}
+
 
 	public void addRide (Ride ride){
 		allRides.add(ride);
@@ -35,52 +43,67 @@ public class RideManager {
 	}
 
 	public void saveToFile() throws FileNotFoundException {
-		File file = new File("rideDetails");
+		File file = new File(F_NAME);
 		PrintWriter pw;
 		
 		if( file.exists()) {
-			String newFileName = F_NAME + new Clock().getHours();
+			String newFileName = calendar.getTime() + F_NAME;
 			File newFile = new File(newFileName);
 			pw = new PrintWriter(newFile);
-			pw.write(toString());
-			pw.close();
-			System.out.println("new file was created: " + newFileName );
-			return;
 		}
-		
-		pw = new PrintWriter(file);
-		pw.write(toString());
+		else {
+			pw = new PrintWriter(file);
+		}
+//			
+		System.out.println("start saving");
+		int size = allRides.size();
+		pw.print(size + "\n"); // printing the number of the rides
+		System.out.println(allRides.size());
+		for (Ride r : allRides) {
+			pw.print(r.getDeparture() + "\n");
+			pw.print(r.getDepartureClock().toString()+ "\n");
+			pw.print(r.getDestination()+ "\n");
+			pw.print(r.getDestinationClock().toString()+ "\n");
+			boolean haveIntermediate = r.getAllIntermediateStations().isEmpty();
+			if(haveIntermediate) {
+				pw.print(ZERO_OBJECT+ "\n");
+			}
+			else {
+				int numOfIntermediate = r.getAllIntermediateStations().size();
+				pw.print(numOfIntermediate + "\n");
+				for (int i = 0; i < numOfIntermediate; i++)
+					pw.print(r.getAllIntermediateStations().get(i).getStationName()+ "\n");// print the intermediante nam
+			}
+		}		
 		pw.close();
-		System.out.println("new file was created: rideDetails" );
+		System.out.println("new file was created! ");
 
 	}
 
 	public void readFile() throws FileNotFoundException {
 		try { 
-			Scanner scan = new Scanner(new File(F_NAME)); // The location should change in another computer
+			File f = new File(F_NAME);
+			if(!f.exists())
+				f = new File(calendar.getTime() + F_NAME);
+			
+			System.out.println(f.exists());;
+			System.out.println(f.getAbsolutePath());
+			Scanner scan = new Scanner(f); // The location should change in another computer
 
-			while(scan.hasNextLine()) {
-				Ride r = new Ride(); 
-				scan.nextLine();scan.nextLine();
-				scan.next();scan.next();
-				r.departure.setStationName(scan.nextLine().trim()); //departure name
-				scan.next();scan.next();
-				r.departureTime.setTime(scan.next()); //departure time
-				scan.next();scan.next();
-				r.destination.setStationName(scan.nextLine().trim()); //destination name
-				scan.next();scan.next();
-				r.destinationTime.setTime(scan.next()); //destination time
-				int num = scan.nextInt();
-				scan.nextLine();scan.nextLine();
-				IntermediateStation is = new IntermediateStation("tocheck");
-				if(num ==0)
-					scan.nextLine();
-				for (int i = 0; i < num; i++) {
-					String name  = scan.next().trim();
-					is.setStationName(name.substring(0,name.length()-1));
-					scan.next();scan.next();scan.next();
-					is.setTime(scan.next());
-					r.addIntermediateStation(is);
+			int numOfRides = Integer.parseInt(scan.nextLine());
+			
+			for(int i=0 ; i<numOfRides ; i++) {
+				Ride r = new Ride();
+				String departure = scan.nextLine();
+				r.setDeparture(departure);
+				r.setDepartureTime(scan.nextLine());
+				r.setDestination(scan.nextLine());
+				r.setDestinationTime(scan.nextLine());
+				int numOfIntermediate = Integer.parseInt(scan.nextLine());
+				if(numOfIntermediate != -1) {
+					for(int j=0 ; j<numOfIntermediate ; j++) {
+						r.addIntermediateStation(new IntermediateStation(scan.nextLine()));
+					}
 				}
 				this.allRides.add(r);
 			}
@@ -89,13 +112,36 @@ public class RideManager {
 			System.out.println("An error occurred.");
 			e.printStackTrace();
 		}
-
+	}
+	
+	public Vector<Ride> checkForClosestRides(Ride mainRide) {
+		Vector<Ride> matchRides = new Vector<Ride>();
+		allRides.sort(new SortRideByDepartureTime());
+		allRides.sort(new SortRideByDepartureAndDestination());
+		int counter =0;
+		
+		for(Ride r : allRides) {
+			if(checkRidesMarch(mainRide, r)&& counter<3) {
+				matchRides.add(r);
+				counter ++;
+			}
+		}
+		return matchRides;
+		
 	}
 
 	public void setAllRides(ArrayList<Ride> allRides) {
 		this.allRides = allRides;
 	}
 
+	public boolean checkRidesMarch(Ride first,Ride second) {
+		if(first.getDeparture().equalsIgnoreCase(second.getDeparture())
+				&& first.getDestination().equalsIgnoreCase(second.getDestination()))
+		return true;
+		else
+			return false;
+	}
+	
 	public String toString(){
 		StringBuilder sb = new StringBuilder();
 		int counter =1;

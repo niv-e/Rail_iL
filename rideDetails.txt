@@ -1,0 +1,19 @@
+3
+Tel aviv
+13:00
+Haifa
+16:00
+2
+Break
+Ashkelon
+Tel aviv
+13:00
+Baar sheva
+16:00
+1
+Ashdod
+Tel aviv
+13:00
+Ako
+19:00
+-1

@@ -6,14 +6,89 @@ import java.util.Scanner;
 
 public class Ride {
 	ArrayList<IntermediateStation> allIntermediateStations = new ArrayList<IntermediateStation>();
-	public Station departure = new Station();
-	public Station destination = new Station();;
-	public Clock departureTime=new Clock();
-	public Clock destinationTime = new Clock();
+	private Station departure;
+	private Station destination;
+	private Clock departureTime=new Clock();
+	private Clock destinationTime = new Clock();
 
 	Scanner s = new Scanner(System.in);
+	
+	public Ride(){
+		
+	}
 
-	public Ride() { }
+	
+	public Ride(String departure , String destination ) {
+		setDeparture(departure);
+		setDestination(destination);
+		
+	}
+
+	public ArrayList<IntermediateStation> getAllIntermediateStations() {
+		return allIntermediateStations;
+	}
+	
+	//getters
+	public String getDeparture() {
+		return departure.getStationName();
+	}
+	
+	public String getDestination() {
+		return destination.getStationName();
+	}
+
+	public Clock getDepartureClock() {
+		return departureTime;
+	}
+
+	public String getDepatureTime() {
+		String time = departureTime.getHours() + ":" +departureTime.getMinutes();
+		return time;
+	}
+	
+	public Clock getDestinationClock() {
+		return destinationTime;
+	}
+	
+	public String getDestinationTime() {
+		String time = destinationTime.getHours() + ":" +destinationTime.getMinutes();
+		return time;
+	}
+
+	public void setAllIntermediateStations(ArrayList<IntermediateStation> allIntermediateStations) {
+		this.allIntermediateStations = allIntermediateStations;
+	}
+
+
+	public void setDeparture(String departure) {
+		this.departure = new Station(departure);
+	}
+	
+	public void setDeparture(Station departure) {
+		this.departure = (departure);
+	}
+
+
+	public void setDestination(String destination) {
+		this.destination = new Station(destination);
+	}
+	
+	public void setDestination(Station destination) {
+		this.destination = destination;
+	}
+	
+	public boolean setDepartureTime(String departureTime) {
+		this.departureTime = new Clock();
+		boolean res = this.departureTime.setTime(departureTime);
+		return res;
+	}
+
+	public boolean setDestinationTime(String destinationTime) {
+		this.destinationTime = new Clock();
+		boolean res = this.destinationTime.setTime(destinationTime);
+		return res;
+		
+	}
 
 	public boolean checkIfTimeInRange(Clock departureTime , Clock destinationTime){
 		if(departureTime.timeToCompare() > destinationTime.timeToCompare()) {

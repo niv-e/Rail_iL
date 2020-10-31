@@ -13,7 +13,7 @@ public class Station {
     public Station(String stationName){
         setStationName(stationName);
     }
-
+    
     public Station(Station station){
         this.stationName= station.stationName;
     }

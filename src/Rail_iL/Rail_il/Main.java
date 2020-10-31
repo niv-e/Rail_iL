@@ -29,40 +29,46 @@ public class Main {
 					while (addMoreRides) {
 						Ride r = new Ride();
 						System.out.println("Please enter departure station's name: ");
-						while(!r.departure.setStationName(s.nextLine())) {
+						String departure = s.nextLine();
+						Station depatureStation = new Station();
+						while(!depatureStation.setStationName(departure)) {
 							System.out.println("Invalid input please try again");
 						}
+						r.setDeparture(depatureStation);
+
 						System.out.println("Please enter departure time in format HH:MM :");
 						String stringTime =s.nextLine();
-						while(!r.departureTime.setTime(stringTime)) {
+						while(!r.setDepartureTime(stringTime)) {
 							System.out.println("Invalid input please try again");
-							System.out.print("");
+//							System.out.print("");
 							stringTime=s.nextLine();
 						}
+						
 						System.out.println("Please enter destination station's name: ");
-						while(!r.destination.setStationName(s.nextLine())) {
+						String destination = s.nextLine();
+						Station destinationStation = new Station();
+						while(!destinationStation.setStationName(destination)) {
 							System.out.println("Invalid input please try again");
 						}
-
+						r.setDestination(destinationStation);
+						
 						System.out.println("Please enter destination time in format HH:MM :");
 						stringTime =s.nextLine();
-						while(!r.destinationTime.setTime(stringTime)) {
+						while(!r.setDestinationTime(stringTime)) {
 							System.out.println("Invalid input please try again");
 							System.out.print("");
 							stringTime=s.nextLine();
 							System.out.println("stringTime input: " + stringTime);
 
+							while(!r.checkIfTimeInRange(r.getDepartureClock(), r.getDestinationClock())) {
+								System.out.println("Invalid time input please try again\n" +
+										"Departure time: " + r.getDeparture().toString() + "\n" +
+										"Destination time: " + r.getDestination().toString()
+										+ "\nDestination time can not be entered before departure time! \n");
+							}
+						
 						}
-						while(!r.checkIfTimeInRange(r.departureTime, r.destinationTime)) {
-							System.out.println("Invalid time input please try again\n" +
-									"Departure time: " + r.departureTime.toString() + "\n" +
-									"Destination time: " + r.destinationTime.toString()
-									+ "\nDestination time can not be entered before departure time! \n");
-							System.out.println("Please enter destination time in format HH:MM :");
-							stringTime =s.nextLine();
-							r.destinationTime.setTime(stringTime);
-						}
-
+						
 						manager.addRide(r);
 						System.out.println("would you like to add another ride");
 						addMoreRides = toContinue();
@@ -89,14 +95,14 @@ public class Main {
 						}
 
 						i.setTime(estimatedStopTime);
-						while(!i.checkIfTimeInRange(manager.allRides.get(choice).departureTime,
-								manager.allRides.get(choice).destinationTime)) {
+						while(!i.checkIfTimeInRange(manager.allRides.get(choice).getDepartureClock(),
+								manager.allRides.get(choice).getDestinationClock())) {
 							System.out.println("Invalid time! \n" +
 									"please make sure the the expected time is in the raid time range");
 							System.out.println("Departure time: "
-									+ manager.allRides.get(choice).departureTime.toString() + "\n"
+									+ manager.allRides.get(choice).getDepartureClock().toString() + "\n"
 									+ "Destination time: " +
-									manager.allRides.get(choice).destinationTime.toString());
+									manager.allRides.get(choice).getDestinationTime().toString());
 							System.out.println("Please enter estimated stop time in format HH:MM: ");
 							estimatedStopTime = s.nextLine();
 							i.setTime(estimatedStopTime);
@@ -114,8 +120,8 @@ public class Main {
 					}else {
 						Collections.sort(manager.allRides, new SortRideByDepartureTime());
 						System.out.print(manager.toString());
-						manager.saveToFile(); // The location should change in another computer
-						System.out.println("\n The rides details are saved");
+//						manager.saveToFile(); // The location should change in another computer
+//						System.out.println("\n The rides details are saved");
 					}
 					break;
 

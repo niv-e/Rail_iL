@@ -13,6 +13,10 @@ public class Clock {
 		this.minutes = 0;
 	}
 
+	public Clock(String time) {
+		this.setTime(time);
+	}
+	
 	public Clock(int hours,int minutes) {
 		this.hours = hours;
 		this.minutes = minutes;
@@ -22,7 +26,6 @@ public class Clock {
 		if ((Hours < 0 || Hours >= 24) || (Minutes < 0 || Minutes >= 60)) {
 			return false;
 		}return true;
-
 	}
 
 	public int timeToCompare(){
@@ -58,6 +61,7 @@ public class Clock {
 		return false; 
 	}
 	public boolean checkIfClose(Clock c) {
+
 		Clock timeAfter = new Clock(this.hours, this.minutes) ;
 		Clock timeBefore=new Clock(this.hours, this.minutes) ;
 		if(this.minutes>=30) {
@@ -65,6 +69,7 @@ public class Clock {
 			timeAfter.minutes = this.minutes-30;
 			timeBefore.minutes = this.minutes-30; 
 		}
+	
 		else {
 			timeBefore.hours--;
 			timeBefore.minutes = this.minutes+30;
