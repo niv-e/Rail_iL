@@ -42,7 +42,7 @@ public class RideManager {
 
 	public void readFile(File f) throws FileNotFoundException {
 		try { 
-			Scanner scan = new Scanner(new File("C:\\Users\\User\\eclipse-workspace\\Rail-IL_User\\src\\Rail_il\\Rides details"));
+			Scanner scan = new Scanner(new File(""C:\\Users\\WINDOWS 10 PRO\\eclipse-workspace\\Rail_IL\\src\\Rail_il\\Rides details"));
 			String str;
 			while(scan.hasNextLine()) {
 				Ride r = new Ride(); 
