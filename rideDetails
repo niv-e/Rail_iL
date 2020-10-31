@@ -1,0 +1,37 @@
+
+ride 1: 
+Department name:	Ako
+Department time:	12:00
+Destination name:	Ashkelon
+Destination time:	15:00
+1
+	Intermediate stations:
+	null: expected stop time: 13:30
+
+
+ride 2: 
+Department name:	Haifa
+Department time:	13:00
+Destination name:	Tel aviv
+Destination time:	15:00
+0
+	Intermediate stations:
+	no intermediate station for this moment
+
+ride 3: 
+Department name:	beer sheva
+Department time:	14:00
+Destination name:	tel Aviv
+Destination time:	16:00
+0
+	Intermediate stations:
+	no intermediate station for this moment
+
+ride 4: 
+Department name:	Dimona
+Department time:	16:30
+Destination name:	jerusalem
+Destination time:	19:00
+0
+	Intermediate stations:
+	no intermediate station for this moment
