@@ -1,0 +1,63 @@
+
+ride 1: 
+Department name: Ofakim
+Department time: 8:47
+Destination name: Dimona
+Destination time: 9:46
+0
+	Intermediate stations:
+	no intermediate station for this moment
+
+ride 2: 
+Department name: Ako
+Department time: 10:22
+Destination name: Ashkelon
+Destination time: 13:25
+0
+	Intermediate stations:
+	no intermediate station for this moment
+
+ride 3: 
+Department name: Afula
+Department time: 11:45
+Destination name: Ashdod Ad Halom
+Destination time: 14:58
+0
+	Intermediate stations:
+	no intermediate station for this moment
+
+ride 4: 
+Department name: Beer Sheva Center
+Department time: 13:17
+Destination name: Jerusalem Yitzhak Navon
+Destination time: 15:55
+0
+	Intermediate stations:
+	no intermediate station for this moment
+
+ride 5: 
+Department name: Bet Shemesh
+Department time: 15:49
+Destination name: Lod
+Destination time: 16:14
+0
+	Intermediate stations:
+	no intermediate station for this moment
+
+ride 6: 
+Department name: Hertsliya
+Department time: 17:13
+Destination name: Haifa Hof Hakarmel
+Destination time: 18:24
+0
+	Intermediate stations:
+	no intermediate station for this moment
+
+ride 7: 
+Department name: Netanya
+Department time: 17:21
+Destination name: Tel Aviv University
+Destination time: 17:42
+0
+	Intermediate stations:
+	no intermediate station for this moment
