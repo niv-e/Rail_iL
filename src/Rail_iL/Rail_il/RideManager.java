@@ -60,19 +60,19 @@ public class RideManager {
 			Scanner scan = new Scanner(new File(F_NAME)); // The location should change in another computer
 
 			while(scan.hasNextLine()) {
-				Ride r = new Ride();
+				Ride r = new Ride(); 
 				scan.nextLine();scan.nextLine();
 				scan.next();scan.next();
-				r.departure.setStationName(scan.next()); //departure name
+				r.departure.setStationName(scan.nextLine().trim()); //departure name
 				scan.next();scan.next();
 				r.departureTime.setTime(scan.next()); //departure time
 				scan.next();scan.next();
-				r.destination.setStationName(scan.next()); //destination name
+				r.destination.setStationName(scan.nextLine().trim()); //destination name
 				scan.next();scan.next();
 				r.destinationTime.setTime(scan.next()); //destination time
 				int num = scan.nextInt();
 				scan.nextLine();scan.nextLine();
-				IntermediateStation is = new IntermediateStation("toCheck");
+				IntermediateStation is = new IntermediateStation("tocheck");
 				if(num ==0)
 					scan.nextLine();
 				for (int i = 0; i < num; i++) {

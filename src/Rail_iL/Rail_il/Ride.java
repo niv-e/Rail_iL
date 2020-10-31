@@ -27,11 +27,11 @@ public class Ride {
 		allIntermediateStations.add(intermediateStation);
 	}
 
-	public String toString() {
+	public String toString() { 
 		Collections.sort(allIntermediateStations, new SortRideByStopTime());
 		StringBuilder sb = new StringBuilder();
-		sb.append("\nDepartment name:\t" + departure.getStationName() + "\nDepartment time:\t" + departureTime.toString()
-				+ "\nDestination name:\t" + destination.getStationName() + "\nDestination time:\t" + destinationTime.toString());
+		sb.append("\nDepartment name: " + departure.getStationName() + "\nDepartment time: " + departureTime.toString()
+				+ "\nDestination name: " + destination.getStationName() + "\nDestination time: " + destinationTime.toString());
 		sb.append("\n"+allIntermediateStations.size());
 		sb.append("\n\tIntermediate stations:\n");
 		if(this.allIntermediateStations.isEmpty())
