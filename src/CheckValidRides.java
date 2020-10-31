@@ -16,22 +16,25 @@ public class CheckValidRides {
 
 	public static void main(String[] args) throws IOException {
 		
-		String depatureStation = args[0];
-		String destentionStation = args[1];
-		String depatureTime = args[2];
+		String inputFormat = args[0];
+		String depatureStation = args[1];
+		String destentionStation = args[2];
+		String depatureTime = args[3];
 		
-		System.out.println(depatureStation);
-		System.out.println(destentionStation);
-		System.out.println(depatureTime);
+//		System.out.println(inputFormat);
+//		System.out.println(depatureStation);
+//		System.out.println(destentionStation);
+//		System.out.println(depatureTime);
 
 		File f = new File(F_NAME);
+
 		RideManager manager = new RideManager();
 		Ride webRide = new Ride();
-		
+
 		webRide.setDeparture(depatureStation);
 		webRide.setDestination(destentionStation);
 		webRide.setDepartureTime(depatureTime);
-		
+
 		try {
 			manager.readFile();
 
@@ -43,29 +46,28 @@ public class CheckValidRides {
 
 		Vector<Ride> closestRides = manager.checkForClosestRides(webRide);
 		
+		switch (args[0]) {
+		case "html":
+			if(closestRides.size()==0)
+				System.out.println("Sorry there are no relevant rides for your ride");
+			else {
+				for(int i=0 ; i<3 && i<closestRides.size(); i++) {
+				System.out.println(closestRides.get(i).toHtml());
+				System.out.println("<br>");
+
+				}
+			}
+			break;
+
+		default:
 		if(closestRides.size()==0)
 			System.out.println("Sorry there are no relevant rides for your ride");
 		else {
 			for(Ride r : closestRides)
 				System.out.println(r);
 		}
-		
-//		
-//		Clock c = new Clock();
-//		c.setTime(depatureTime);
-//		int counter = 0;
-//		for (Ride r1 : manager.getAllRides()) { 
-//			if(r1.getDeparture().equalsIgnoreCase(depatureStation) && 
-//					r1.getDestination().equalsIgnoreCase(destentionStation)) {
-//				if(r1.getDepartureClock().checkIfClose(c)&&counter<=3) {
-//					System.out.println(r1.toString());	
-//					counter++;
-//				}
-//				else
-//					System.out.println("Sorry there are no relevant rides for your ride");
-//			}
-//			else if(manager.getAllRides().indexOf(r1) == manager.getAllRides().size()-1 && counter == 0)
-//				System.out.println("Sorry there are no relevant rides for your ride"); 
-//		} 
+			break;
+		}
 	}
 }
+

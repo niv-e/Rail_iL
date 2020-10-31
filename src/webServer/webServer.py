@@ -26,31 +26,30 @@ def subtract():
     return str(a - b)
 
 
-def string(param):
-    pass
-
 
 @app.route("/rail")
 def rail_schedule():
     if 'outformat' in request.args:
         outformat = request.args.get('outformat')
     else:
-        outformat = "html"
+        outformat = 'html'
 
-    if 'istaion' in request.args:
-        istaion = request.args.get('iStaion')
+    if 'dept' in request.args:
+        dept = request.args.get('dept')
     else:
-        istaion = "Tel%20aviv"
+        dept = 'Tel aviva'
 
-    if 'fstaion' in request.args:
-        fstaion = request.args.get('fStaion')
+    if 'dest' in request.args:
+        dest = request.args.get('dest')
     else:
-        istaion = "Tel%20aviv"
+        dest = 'Tel aviva'
 
     if 'time' in request.args:
-        time = string(request.args.get('time'))
+        time = request.args.get('time')
     else:
-        time = "12:00"
+        time = '12:00'
 
-    return subprocess.check_output(["java", "-classpath", "../Rail_iL/bin", "CheckValidRides",
-                                    outformat, istaion, fstaion, time])
+    return subprocess.check_output(["java", "-classpath", "/home/niv/Desktop/backup/Rail_iL/bin", "CheckValidRides",
+                                    outformat, dept, dest, time])
+#http:/rail?dept=Tel%20aviv&dest=Haifa&time=%2715:00%27
+

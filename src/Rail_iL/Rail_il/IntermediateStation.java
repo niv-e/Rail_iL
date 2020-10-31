@@ -19,7 +19,11 @@ public class IntermediateStation extends Station {
     public boolean setTime(String estimatedStopTime){
         return this.estimatedStopTime.setTime(estimatedStopTime);
     }
-
+    
+    public String getStopTime() {
+    	return this.estimatedStopTime.toString();
+    }
+    
     public String toString(){
         StringBuilder sb = new StringBuilder();
         sb.append("\t" + stationName +":" +" expected stop time: " + estimatedStopTime.toString()+"\n" );

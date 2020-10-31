@@ -48,7 +48,7 @@ public class Clock {
 			tempMinutes = Integer.parseInt(stringTime.substring(3,5));
 
 		}catch(Exception e){
-			System.out.println(e.getMessage());
+//			System.out.println(e.getMessage());
 			return false;
 		}
 

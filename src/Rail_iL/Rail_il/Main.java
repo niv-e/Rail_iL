@@ -1,4 +1,5 @@
 package Rail_il;
+
 import java.util.Collections;
 import java.util.Scanner;
 
@@ -31,44 +32,44 @@ public class Main {
 						System.out.println("Please enter departure station's name: ");
 						String departure = s.nextLine();
 						Station depatureStation = new Station();
-						while(!depatureStation.setStationName(departure)) {
+						while (!depatureStation.setStationName(departure)) {
 							System.out.println("Invalid input please try again");
 						}
 						r.setDeparture(depatureStation);
 
 						System.out.println("Please enter departure time in format HH:MM :");
-						String stringTime =s.nextLine();
-						while(!r.setDepartureTime(stringTime)) {
+						String stringTime = s.nextLine();
+						while (!r.setDepartureTime(stringTime)) {
 							System.out.println("Invalid input please try again");
 //							System.out.print("");
-							stringTime=s.nextLine();
+							stringTime = s.nextLine();
 						}
-						
+
 						System.out.println("Please enter destination station's name: ");
 						String destination = s.nextLine();
 						Station destinationStation = new Station();
-						while(!destinationStation.setStationName(destination)) {
+						while (!destinationStation.setStationName(destination)) {
 							System.out.println("Invalid input please try again");
 						}
 						r.setDestination(destinationStation);
-						
+
 						System.out.println("Please enter destination time in format HH:MM :");
-						stringTime =s.nextLine();
-						while(!r.setDestinationTime(stringTime)) {
+						stringTime = s.nextLine();
+						while (!r.setDestinationTime(stringTime)) {
 							System.out.println("Invalid input please try again");
 							System.out.print("");
-							stringTime=s.nextLine();
+							stringTime = s.nextLine();
 							System.out.println("stringTime input: " + stringTime);
 
-							while(!r.checkIfTimeInRange(r.getDepartureClock(), r.getDestinationClock())) {
-								System.out.println("Invalid time input please try again\n" +
-										"Departure time: " + r.getDeparture().toString() + "\n" +
-										"Destination time: " + r.getDestination().toString()
+							while (!r.checkIfTimeInRange(r.getDepartureClock(), r.getDestinationClock())) {
+								System.out.println("Invalid time input please try again\n" + "Departure time: "
+										+ r.getDeparture().toString() + "\n" + "Destination time: "
+										+ r.getDestination().toString()
 										+ "\nDestination time can not be entered before departure time! \n");
 							}
-						
+
 						}
-						
+
 						manager.addRide(r);
 						System.out.println("would you like to add another ride");
 						addMoreRides = toContinue();
@@ -89,20 +90,20 @@ public class Main {
 						String estimatedStopTime = s.nextLine();
 						IntermediateStation i = new IntermediateStation(intermediateName);
 
-						while(!i.setTime(estimatedStopTime)) {
+						while (!i.setTime(estimatedStopTime)) {
 							System.out.println("Please enter estimated stop time in format HH:MM: ");
 							estimatedStopTime = s.nextLine();
 						}
 
 						i.setTime(estimatedStopTime);
-						while(!i.checkIfTimeInRange(manager.allRides.get(choice).getDepartureClock(),
+						while (!i.checkIfTimeInRange(manager.allRides.get(choice).getDepartureClock(),
 								manager.allRides.get(choice).getDestinationClock())) {
-							System.out.println("Invalid time! \n" +
-									"please make sure the the expected time is in the raid time range");
-							System.out.println("Departure time: "
-									+ manager.allRides.get(choice).getDepartureClock().toString() + "\n"
-									+ "Destination time: " +
-									manager.allRides.get(choice).getDestinationTime().toString());
+							System.out.println("Invalid time! \n"
+									+ "please make sure the the expected time is in the raid time range");
+							System.out.println(
+									"Departure time: " + manager.allRides.get(choice).getDepartureClock().toString()
+											+ "\n" + "Destination time: "
+											+ manager.allRides.get(choice).getDestinationTime().toString());
 							System.out.println("Please enter estimated stop time in format HH:MM: ");
 							estimatedStopTime = s.nextLine();
 							i.setTime(estimatedStopTime);
@@ -114,36 +115,34 @@ public class Main {
 					break;
 
 				case 3:
-					if(manager.allRides.isEmpty()) {
+					if (manager.allRides.isEmpty()) {
 						System.out.println("Enter rides details first!");
 						break;
-					}else {
+					} else {
 						Collections.sort(manager.allRides, new SortRideByDepartureTime());
 						System.out.print(manager.toString());
-//						manager.saveToFile(); // The location should change in another computer
-//						System.out.println("\n The rides details are saved");
 					}
 					break;
 
-					
 				case 4:
 					manager.saveToFile();
 					break;
-					
+
 				case 5:
 					manager.readFile();
 					break;
-					
+
 				case 6:
 					System.out.println("What station are you coming from?");
 					String departure = s.next();
 					System.out.println("What is your destination station?");
 					String destination = s.next();
-					System.out.println("When are you going to leave the departure station? \nPlease enter the time in format HH:MM: ");
+					System.out.println(
+							"When are you going to leave the departure station? \nPlease enter the time in format HH:MM: ");
 					String time = s.next();
 					manager.showRelevantRides(departure, destination, time);
 					break;
-					
+
 				case 9:
 					System.out.println("bye bye!");
 					exit = true;
@@ -165,7 +164,6 @@ public class Main {
 		Scanner s = new Scanner(System.in);
 		System.out.println("please enter y for yes or any key to exit");
 		char c = s.next().charAt(0);
-		return  (c == 'y' || c == 'Y');
+		return (c == 'y' || c == 'Y');
 	}
 }
-
